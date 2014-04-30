@@ -1,1 +1,27 @@
-<pre><%= @role.to_yaml %></pre>
+<div class="page-header">
+  <h1><%= @role_character_ind %></h1>
+</div>
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-sm-2">
+              <img src= <%= @role_url_ind %> class="img-responsive">
+          </div>
+          <div class="col-sm-10">
+            <dl>
+              <dt>Movie</dt>
+              <dd><%= @role_movie_ind %></dd>
+
+              <dt>Actor</dt>
+              <dd><%= @role_actor_ind %></dd>
+
+
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
