@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
     # Your Ruby goes here.
     # You'll probably have to use both ActiveRecord query methods as well as some plain old Ruby logic.
 
-    first_actor_id = Actor.second.id
+    first_actor_id = Actor.first.id
     first_actor_total_movie_array = Array.new
 
     role_array = Role.where({:actor_id => first_actor_id})
