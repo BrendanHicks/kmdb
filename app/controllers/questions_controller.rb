@@ -12,7 +12,11 @@ class QuestionsController < ApplicationController
 
     # Your Ruby goes here.
 
-    # @year_of_oldest_movie = ???
+
+
+    @year_of_oldest_movie = Movie.order(year: :asc).first["year"]
+
+
   end
 
   def question_3
@@ -20,7 +24,13 @@ class QuestionsController < ApplicationController
 
     # Your Ruby goes here.
 
-    # @number_of_movies_directed_by_first_movie_director = ???
+    first_director_id = Director.first["id"]
+
+      @director_name = Director.first[:name]
+
+    @number_of_movies_directed_by_first_movie_director = Movie.where({:director_id => first_director_id}).count
+
+
   end
 
   def question_4
@@ -29,7 +39,25 @@ class QuestionsController < ApplicationController
     # Your Ruby goes here.
     # You'll probably have to use both ActiveRecord query methods as well as some plain old Ruby logic.
 
-    # @most_number_of_movies_by_a_single_director = ???
+    top_director_count = 0
+      d_table = Director.all
+
+        d_table.each do |director|
+
+          dir_id = director.id
+
+          m = Movie.where({:director_id => dir_id}).count
+
+            if m > top_director_count
+
+              top_director_count = m
+
+            end
+
+        end
+
+    @most_number_of_movies_by_a_single_director = top_director_count
+
   end
 
   def question_5
@@ -38,6 +66,24 @@ class QuestionsController < ApplicationController
     # Your Ruby goes here.
     # You'll probably have to use both ActiveRecord query methods as well as some plain old Ruby logic.
 
-    # @most_recent_movie_for_first_actor = ???
+    first_actor_id = Actor.second.id
+    first_actor_total_movie_array = Array.new
+
+    role_array = Role.where({:actor_id => first_actor_id})
+
+    role_array.each do |role|
+      movie = Movie.find(role.movie_id)
+      first_actor_total_movie_array.push movie
+    end
+
+    @most_recent_movie_for_first_actor = first_actor_total_movie_array.sort { |a, b| b.year <=> a.year}.first.title
+
+
+
+
+
+
+
+
   end
 end
